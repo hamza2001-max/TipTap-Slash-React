@@ -1,0 +1,164 @@
+.ProseMirror,
+.tiptap {
+  padding: 15px 10px;
+  height: 100%;
+
+  :focus {
+    outline: none;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-weight: 700;
+    line-height: 1.2;
+  }
+
+  h1 {
+    font-size: 2.5rem;
+  }
+  h2 {
+    font-size: 2rem;
+  }
+  h3 {
+    font-size: 1.75rem;
+  }
+  h4 {
+    font-size: 1.5rem;
+  }
+  h5 {
+    font-size: 1.25rem;
+  }
+  h6 {
+    font-size: 1rem;
+  }
+
+  p {
+    font-size: 20px;
+    margin-bottom: 20px;
+  }
+
+  ul,
+  ol {
+    margin: 3rem 0 1.5rem 1.5rem;
+  }
+
+  ul {
+    list-style: disc;
+  }
+  ol {
+    list-style: decimal;
+  }
+
+  blockquote {
+    border-left: 4px solid black;
+    padding-left: 1rem;
+    margin: 3rem 0 1.5rem 1.5rem;
+  }
+
+  pre {
+    background-color: #f5f5f5;
+    padding: 1rem;
+    border-radius: 0.25rem;
+  }
+
+  pre code {
+    background-color: transparent;
+    padding: 0;
+  }
+
+  a {
+    color: rgb(81, 83, 215);
+    text-decoration: underline;
+    cursor: pointer;
+  }
+}
+
+.editor-content {
+  max-width: none;
+  padding: 16px;
+  outline: none;
+  appearance: none;
+}
+
+.editor-content:focus {
+  outline: none;
+}
+
+.slash-menu {
+  position: relative;
+  border-radius: 0.5rem;
+  background: white;
+  color: #333;
+  overflow: hidden;
+  font-size: 0.9rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08);
+  max-height: 300px;
+  overflow-y: auto;
+  padding: 0.5rem;
+}
+
+.slash-menu__item {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  text-align: left;
+  background: transparent;
+  border: none;
+  padding: 0.5rem;
+  border-radius: 0.25rem;
+  transition: background-color 0.2s ease;
+
+  &:hover{
+    cursor: pointer;
+  }
+
+  svg {
+    width: 20px;
+    height: 20px;
+    margin-right: 12px;
+  }
+}
+
+.slash-menu__item-title {
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.slash-menu__item--disabled {
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+.slash-menu__item--selected,
+.slash-menu__item:hover {
+  background: rgba(79, 70, 229, 0.1);
+}
+
+
+.items {
+  position: relative;
+  border-radius: 0.25rem;
+  background: white;
+  color: rgba(black, 0.8);
+  overflow: hidden;
+  font-size: 0.9rem;
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.1), 0px 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+.item {
+  display: block;
+  width: 100%;
+  text-align: left;
+  background: transparent;
+  border: none;
+  padding: 0.2rem 0.5rem;
+}
+
+.item.is-selected,
+.item:hover {
+  background: rgba(#b3b3b3, 0.1);
+}
