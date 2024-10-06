@@ -1,81 +1,84 @@
-# Slash Suggestion Component Documentation
+# Slash Suggestion
 
 ## Overview
 
-The Slash Suggestion component is a feature-rich extension for text editors that provides a customizable command palette triggered by typing a slash ("/"). It's built on top of the Tiptap editor and uses the `@tiptap/suggestion` plugin.
+The Slash Suggestion is an extension for text editors that provides a customizable command palette triggered by typing a slash ("/"). Built on top of the Tiptap editor and utilizing the `@tiptap/suggestion` plugin.
 
-## Key Components
+## Key Features
 
-### 1. SlashSuggestion
-
-The main extension that integrates the slash suggestion functionality into the Tiptap editor.
-
-#### Features:
 - Customizable trigger character (default: "/")
 - Filterable command items
 - Keyboard navigation support
 - Custom rendering of suggestion list
 
-#### Usage:
-```typescript
-import { SlashSuggestion } from './path-to-slash-suggestion';
+## Installation
 
-const editor = new Editor({
+```bash
+npm install tiptap-slash-react
+```
+
+## Basic Usage
+
+### TypeScript
+
+```typescript
+import { useEditor } from "@tiptap/react";
+import { SlashSuggestion, filterCommandItems } from "tiptap-slash-react";
+
+const editor = useEditor({
   extensions: [
     SlashSuggestion.configure({
-      commandItems: customCommandItems,
-      // Other options...
+      suggestion: {
+        items: ({ query }: { query: string }) => filterCommandItems(query),
+      },
     }),
-    // Other extensions...
   ],
 });
 ```
 
-### 2. CommandsList
+### JavaScript
 
-A React component that renders the list of available commands.
+```javascript
+import { useEditor } from "@tiptap/react";
+import { SlashSuggestion, filterCommandItems } from "tiptap-slash-react";
 
-#### Features:
-- Keyboard navigation (up/down arrows)
-- Mouse interaction
-- Disabled item support
-- Smooth scrolling to selected item
-
-### 3. RenderSuggestions
-
-A utility function that handles the rendering of the suggestion popup using Tippy.js.
-
-### 4. filterCommandItems
-
-A utility function that filters the command items based on the user's input.
-
-### 5. DefaultCommandItems
-
-A set of predefined command items for common heading levels (H1 to H5).
-
-## Types
-
-The component uses several TypeScript interfaces to ensure type safety:
-
-- `CommandItem`: Represents a single command in the suggestion list.
-- `CustomCommandItem`: A variant of CommandItem with a required `command` property.
-- `Range`: Represents a text range in the editor.
-- `CommandsListProps`: Props for the CommandsList component.
-- `RenderSuggestionsProps`: Props for the suggestion renderer.
-- `SlashSuggestionOptions`: Configuration options for the SlashSuggestion extension.
+const editor = useEditor({
+  extensions: [
+    SlashSuggestion.configure({
+      suggestion: {
+        items: ({ query }) => filterCommandItems(query),
+      },
+    }),
+  ],
+});
+```
 
 ## Customization
 
-You can customize the SlashSuggestion component by:
+You can customize the SlashSuggestion component in several ways:
 
 1. Providing custom command items
-2. Modifying the suggestion options
-3. Styling the command list and items using CSS
+2. Styling the command list and items using CSS
+3. Modifying the trigger character
+4. Implementing custom filtering logic
 
-## Example: Adding Custom Commands
+### Custom Command Items
+
+To add custom commands, you can define a `CustomCommandItem` interface (in TypeScript) or object structure (in JavaScript):
 
 ```typescript
-import { SlashSuggestion, CustomCommandItem } from './path-to-slash-suggestion';
+interface CustomCommandItem {
+  title: string;
+  icon?: React.ReactNode;
+  command: (props: { editor: Editor; range: Range }) => void;
+}
+```
+
+#### TypeScript
+
+```typescript
+import { useEditor } from "@tiptap/react";
+import { SlashSuggestion, filterCommandItems, CustomCommandItem } from "tiptap-slash-react";
 
 const customCommands: CustomCommandItem[] = [
   {
@@ -104,33 +107,64 @@ const customCommands: CustomCommandItem[] = [
   // More custom commands...
 ];
 
-const editor = new Editor({
+const editor = useEditor({
   extensions: [
     SlashSuggestion.configure({
-      commandItems: [...DefaultCommandItems, ...customCommands],
+      commandItems: customCommands,
+      suggestion: {
+        items: ({ query }: { query: string }) =>
+          filterCommandItems(query, customCommands),
+      },
     }),
-    // Other extensions...
   ],
 });
 ```
 
-## Best Practices
+#### JavaScript
 
-1. Keep the command list concise and relevant to improve user experience.
-2. Provide clear and descriptive titles for each command.
-3. Use icons to make commands easily recognizable.
-4. Implement proper keyboard navigation support for accessibility.
-5. Consider adding categories or separators if you have many commands.
+```javascript
+import { useEditor } from "@tiptap/react";
+import { SlashSuggestion, filterCommandItems } from "tiptap-slash-react";
 
-## Performance Considerations
+const customCommands = [
+  {
+    title: "Bold",
+    icon: (
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="24"
+        height="24"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        className="icon icon-tabler icons-tabler-outline icon-tabler-bold"
+      >
+        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+        <path d="M7 5h6a3.5 3.5 0 0 1 0 7h-6z" />
+        <path d="M13 12h1a3.5 3.5 0 0 1 0 7h-7v-7" />
+      </svg>
+    ),
+    command: ({ editor, range }) =>
+      editor.chain().focus().deleteRange(range).toggleBold().run(),
+  },
+  // More custom commands...
+];
 
-- The `CommandsList` component is memoized to prevent unnecessary re-renders.
-- Command filtering is performed on each keystroke, so keep the filtering logic efficient for large command sets.
+const editor = useEditor({
+  extensions: [
+    SlashSuggestion.configure({
+      commandItems: customCommands,
+      suggestion: {
+        items: ({ query }) => filterCommandItems(query, customCommands),
+      },
+    }),
+  ],
+});
+```
 
-## Accessibility
+## Conclusion
 
-The component supports keyboard navigation, which is crucial for accessibility. Ensure that any custom styling maintains a clear focus state for keyboard users.
-
-## Browser Compatibility
-
-This component should work in all modern browsers that support ES6+ features. For older browsers, consider using appropriate polyfills or transpilation.
+The Slash Suggestion component provides a flexible and powerful way to add command suggestions to your Tiptap editor. 
