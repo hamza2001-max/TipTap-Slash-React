@@ -36,7 +36,7 @@ const RenderSuggestions = () => {
         getReferenceClientRect: props.clientRect,
       });
     },
-    onKeyDown(props: SuggestionKeyDownProps):boolean {
+    onKeyDown(props: SuggestionKeyDownProps): boolean {
       if (props.event.key === "Escape") {
         popup[0].hide();
         return true;

@@ -1,4 +1,4 @@
-import "./App.css"
+import "./App.css";
 import SlashSuggestion from "./utils/slashSuggestion";
 import filterCommandItems from "./utils/filterCommandItems";
 import { CustomCommandItem } from "./types";

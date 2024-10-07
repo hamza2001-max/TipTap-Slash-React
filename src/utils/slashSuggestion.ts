@@ -1,14 +1,14 @@
 import { Extension } from "@tiptap/core";
 import Suggestion, { SuggestionOptions } from "@tiptap/suggestion";
 import RenderSuggestions from "../components/RenderSuggestions";
-import { filterCommandItems} from "./filterCommandItems";
+import { filterCommandItems } from "./filterCommandItems";
 import { CommandItem, SlashSuggestionOptions } from "../types";
 
-declare module '@tiptap/core' {
+declare module "@tiptap/core" {
   interface Commands<ReturnType> {
     slashSuggestion: {
       setSlashSuggestion: () => ReturnType;
-    }
+    };
   }
 }
 
@@ -19,7 +19,15 @@ const SlashSuggestion = Extension.create<SlashSuggestionOptions>({
     return {
       suggestion: {
         char: "/",
-        command: ({ editor, range, props }: { editor: any; range: any; props: any }) => {
+        command: ({
+          editor,
+          range,
+          props,
+        }: {
+          editor: any;
+          range: any;
+          props: any;
+        }) => {
           props.command({ editor, range });
         },
         items: ({ query }: { query: string }) => {
@@ -27,7 +35,7 @@ const SlashSuggestion = Extension.create<SlashSuggestionOptions>({
         },
         render: () => {
           let component: ReturnType<typeof RenderSuggestions>;
-          
+
           return {
             onStart: (props: any) => {
               component = RenderSuggestions();
