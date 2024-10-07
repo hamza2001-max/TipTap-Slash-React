@@ -1,7 +1,5 @@
 # Slash Suggestion
 
-## Overview
-
 The Slash Suggestion is an extension for text editors that provides a customizable command palette triggered by typing a slash ("/"). Built on top of the Tiptap editor and utilizing the `@tiptap/suggestion` plugin.
 
 ## Key Features
@@ -24,6 +22,7 @@ npm install tiptap-slash-react
 ```typescript
 import { useEditor } from "@tiptap/react";
 import { SlashSuggestion, filterCommandItems } from "tiptap-slash-react";
+import "tiptap-slash-react/dist/index.css";
 
 const editor = useEditor({
   extensions: [
@@ -41,6 +40,7 @@ const editor = useEditor({
 ```javascript
 import { useEditor } from "@tiptap/react";
 import { SlashSuggestion, filterCommandItems } from "tiptap-slash-react";
+import "tiptap-slash-react/dist/index.css";
 
 const editor = useEditor({
   extensions: [
@@ -54,15 +54,6 @@ const editor = useEditor({
 ```
 
 ## Customization
-
-You can customize the SlashSuggestion component in several ways:
-
-1. Providing custom command items
-2. Styling the command list and items using CSS
-3. Modifying the trigger character
-4. Implementing custom filtering logic
-
-### Custom Command Items
 
 To add custom commands, you can define a `CustomCommandItem` interface (in TypeScript) or object structure (in JavaScript):
 
@@ -79,6 +70,7 @@ interface CustomCommandItem {
 ```typescript
 import { useEditor } from "@tiptap/react";
 import { SlashSuggestion, filterCommandItems, CustomCommandItem } from "tiptap-slash-react";
+import "tiptap-slash-react/dist/index.css";
 
 const customCommands: CustomCommandItem[] = [
   {
@@ -125,6 +117,7 @@ const editor = useEditor({
 ```javascript
 import { useEditor } from "@tiptap/react";
 import { SlashSuggestion, filterCommandItems } from "tiptap-slash-react";
+import "tiptap-slash-react/dist/index.css";
 
 const customCommands = [
   {
