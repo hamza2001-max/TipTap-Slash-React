@@ -1,35 +1,43 @@
 import resolve from '@rollup/plugin-node-resolve';
 import commonjs from '@rollup/plugin-commonjs';
-import peerDepsExternal from 'rollup-plugin-peer-deps-external';
-import { terser } from 'rollup-plugin-terser';
-import babel from '@rollup/plugin-babel';
+import typescript from '@rollup/plugin-typescript';
+import css from 'rollup-plugin-css-only';
+import dts from "rollup-plugin-dts";
+import { babel } from '@rollup/plugin-babel';
+
+const packageJson = require("./package.json");
 
 export default [
   {
     input: 'src/index.ts',
     output: [
       {
-        file: 'dist/index.js',
-        format: 'cjs',
+        file: packageJson.main,
+        format: "cjs",
         sourcemap: true,
       },
       {
-        file: 'dist/index.esm.js',
-        format: 'esm',
+        file: packageJson.module,
+        format: "esm",
         sourcemap: true,
       },
     ],
     plugins: [
-      peerDepsExternal(),
-      resolve({ extensions: ['.js', '.ts', '.tsx'] }),
+      resolve(),
       commonjs(),
-      babel({ babelHelpers: 'bundled' }),
-      terser(),
-    ]
+      typescript({ tsconfig: "./tsconfig.json" }),
+      babel({
+        exclude: 'node_modules/**',
+        extensions: ['.js', '.jsx', '.ts', '.tsx'],
+      }),
+      css({ output: 'index.css' })
+    ],
+    external: ['react', 'react-dom']
   },
   {
     input: 'src/index.ts',
-    output: { file: 'dist/index.d.ts', format: 'es' },
+    output: { file: 'dist/index.d.ts', format: 'esm' },
     plugins: [dts()],
+    external: [/\.css$/]
   },
 ];

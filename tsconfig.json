@@ -1,32 +1,20 @@
 {
-    "compilerOptions": {
-      "target": "es6",
-      "module": "commonjs",
-      "jsx": "react-jsx",
-      "declaration": true,
-      "declarationMap": true,
-      "lib": ["dom", "es6", "es2017", "esnext.asynciterable"],
-      "sourceMap": true,
-      "outDir": "./dist",
-      "moduleResolution": "node",
-      "removeComments": true,
-      "noImplicitAny": true,
-      "strictNullChecks": true,
-      "strictFunctionTypes": true,
-      "noImplicitThis": true,
-      "noUnusedLocals": true,
-      "noUnusedParameters": true,
-      "noImplicitReturns": true,
-      "noFallthroughCasesInSwitch": true,
-      "allowSyntheticDefaultImports": true,
-      "esModuleInterop": true,
-      "emitDecoratorMetadata": true,
-      "experimentalDecorators": true,
-      "resolveJsonModule": true,
-      "baseUrl": ".",
-      "strict": true,
-      "skipLibCheck": true
-    },
-    "exclude": ["node_modules"],
-    "include": ["./src/**/*.tsx", "./src/**/*.ts"]
-  }
+  "compilerOptions": {
+    "target": "es5",
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "strict": true,
+    "skipLibCheck": true,
+    "jsx": "react-jsx",
+    "module": "ESNext",
+    "declaration": true,
+    "declarationDir": "dist",
+    "sourceMap": true,
+    "outDir": "dist",
+    "moduleResolution": "node",
+    "allowSyntheticDefaultImports": true,
+    "emitDeclarationOnly": false
+  },
+  "include": ["src/**/*.ts", "src/**/*.tsx"],
+  "exclude": ["node_modules", "dist"]
+}
